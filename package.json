@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/AndreBlankholm/generator-for-portfolio/issues"
   },
-  "homepage": "https://github.com/AndreBlankholm/generator-for-portfolio#readme"
+  "homepage": "https://github.com/AndreBlankholm/generator-for-portfolio#readme",
+  "dependencies": {
+    "inquirer": "^9.1.4"
+  }
 }
