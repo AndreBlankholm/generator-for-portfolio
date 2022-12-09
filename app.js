@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-console.log(inquirer);
+
 //const fs = require("fs"); // requiring the filesystem's module  //
 
 //const generatePage = require('./src/page-template');
@@ -15,4 +15,13 @@ console.log(inquirer);
   //console.log('Portfolio complete! Check out index.html to see the output!');
 //});
 
+inquirer
+  .prompt([
+    {
+      type: 'input', // the answer will be a text reply
+      name: 'name',
+      message: 'What is your name?'
+    }
+  ]) 
+  .then(answers => console.log(answers));
 
