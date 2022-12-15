@@ -41,7 +41,7 @@ const promptUser = () => {
       type: "input",
       name: "about",
       message: "Provide some information about yourself:",
-      when: ({ confirmAbout }) => confirmAbout,
+      when: ({ confirmAbout }) => confirmAbout,   // conditionally ask for an about section using the name: key value
     },
   ]);
 };
@@ -128,7 +128,7 @@ Add a New Project
     .then((projectData) => {
       portfolioData.projects.push(projectData);
       if (projectData.confirmAddProject) {
-        return promptProject(portfolioData);
+        return promptProject(portfolioData); // this is recursion 
       } else {
         return portfolioData;
       }
