@@ -1,4 +1,4 @@
-const fs = require("fs");
+const generateSite = require('./utils/generate-site.js');
 const inquirer = require("inquirer");
 const generatePage = require("./src/page-template");
 
@@ -41,7 +41,7 @@ const promptUser = () => {
       type: "input",
       name: "about",
       message: "Provide some information about yourself:",
-      when: ({ confirmAbout }) => confirmAbout,   // conditionally ask for an about section using the name: key value
+      when: ({ confirmAbout }) => confirmAbout, // conditionally ask for an about section using the name: key value
     },
   ]);
 };
@@ -123,12 +123,12 @@ Add a New Project
         name: "confirmAddProject",
         message: "Would you like to enter another project?",
         default: false,
-      }
+      },
     ])
     .then((projectData) => {
       portfolioData.projects.push(projectData);
       if (projectData.confirmAddProject) {
-        return promptProject(portfolioData); // this is recursion 
+        return promptProject(portfolioData); // this is recursion
       } else {
         return portfolioData;
       }
@@ -137,14 +137,21 @@ Add a New Project
 
 promptUser()
   .then(promptProject)
-  .then((portfolioData) => {
+  .then(portfolioData => {
     console.log(portfolioData);
-    // will be uncommented in lesson 4
-    const pageHTML = generatePage(portfolioData);
-    fs.writeFile("./index.html", pageHTML, (err) => {
-      if (err) throw new Error(err);
-      console.log(
-        "Page created! Check out index.html in this directory to see it!"
-      );
-    });
+    return generatePage(portfolioData);
+    
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
   });
